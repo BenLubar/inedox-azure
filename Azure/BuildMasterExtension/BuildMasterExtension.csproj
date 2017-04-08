@@ -1,0 +1,182 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{ECEBB48D-C8E2-4E4D-A815-5BAF4F6800DD}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Inedo.BuildMasterExtensions.Azure</RootNamespace>
+    <AssemblyName>Azure</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;BuildMaster</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE;BuildMaster</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="BuildMaster.Web.Controls, Version=5.6.0.23, Culture=neutral, PublicKeyToken=112cfb71329714a6, processorArchitecture=MSIL">
+      <HintPath>..\packages\Inedo.BuildMaster.SDK.5.6.0\lib\net45\BuildMaster.Web.Controls.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="BuildMasterCore, Version=5.6.0.23, Culture=neutral, PublicKeyToken=112cfb71329714a6, processorArchitecture=MSIL">
+      <HintPath>..\packages\Inedo.BuildMaster.SDK.5.6.0\lib\net45\BuildMasterCore.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Inedo.Agents.Client, Version=471.1.0.0, Culture=neutral, PublicKeyToken=9de986a2f8db80fc, processorArchitecture=MSIL">
+      <HintPath>..\packages\Inedo.BuildMaster.SDK.5.6.0\lib\net45\Inedo.Agents.Client.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Inedo.ExecutionEngine, Version=49.2.0.0, Culture=neutral, PublicKeyToken=68703f0e52007e75, processorArchitecture=MSIL">
+      <HintPath>..\packages\Inedo.BuildMaster.SDK.5.6.0\lib\net45\Inedo.ExecutionEngine.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="InedoLib, Version=471.1.0.0, Culture=neutral, PublicKeyToken=112cfb71329714a6, processorArchitecture=MSIL">
+      <HintPath>..\packages\Inedo.BuildMaster.SDK.5.6.0\lib\net45\InedoLib.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Microsoft.Azure.KeyVault.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Azure.KeyVault.Core.1.0.0\lib\net40\Microsoft.Azure.KeyVault.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Azure.Management.AppService.Fluent, Version=1.0.0.50, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Azure.Management.AppService.Fluent.1.0.0-beta50\lib\net45\Microsoft.Azure.Management.AppService.Fluent.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Azure.Management.Graph.RBAC.Fluent, Version=1.0.0.50, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Azure.Management.Graph.RBAC.Fluent.1.0.0-beta50\lib\net45\Microsoft.Azure.Management.Graph.RBAC.Fluent.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Azure.Management.KeyVault.Fluent, Version=1.0.0.50, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Azure.Management.KeyVault.Fluent.1.0.0-beta50\lib\net45\Microsoft.Azure.Management.KeyVault.Fluent.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Azure.Management.ResourceManager.Fluent, Version=1.0.0.50, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Azure.Management.ResourceManager.Fluent.1.0.0-beta50\lib\net45\Microsoft.Azure.Management.ResourceManager.Fluent.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Data.Edm, Version=5.8.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Data.Edm.5.8.2\lib\net40\Microsoft.Data.Edm.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Data.OData, Version=5.8.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Data.OData.5.8.2\lib\net40\Microsoft.Data.OData.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Data.Services.Client, Version=5.8.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Data.Services.Client.5.8.2\lib\net40\Microsoft.Data.Services.Client.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.Clients.ActiveDirectory, Version=2.28.3.860, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IdentityModel.Clients.ActiveDirectory.2.28.3\lib\net45\Microsoft.IdentityModel.Clients.ActiveDirectory.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.Clients.ActiveDirectory.WindowsForms, Version=2.28.3.860, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IdentityModel.Clients.ActiveDirectory.2.28.3\lib\net45\Microsoft.IdentityModel.Clients.ActiveDirectory.WindowsForms.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Rest.ClientRuntime, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Rest.ClientRuntime.2.3.5\lib\net45\Microsoft.Rest.ClientRuntime.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Rest.ClientRuntime.Azure, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Rest.ClientRuntime.Azure.3.3.5\lib\net45\Microsoft.Rest.ClientRuntime.Azure.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Rest.ClientRuntime.Azure.Authentication, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Rest.ClientRuntime.Azure.Authentication.2.2.10\lib\net45\Microsoft.Rest.ClientRuntime.Azure.Authentication.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.WindowsAzure.Storage, Version=8.1.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\WindowsAzure.Storage.8.1.1\lib\net45\Microsoft.WindowsAzure.Storage.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Net" />
+    <Reference Include="System.Net.Http.WebRequest" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Spatial, Version=5.8.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Spatial.5.8.2\lib\net40\System.Spatial.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading" />
+    <Reference Include="System.Threading.Tasks" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Legacy\AzureAction.cs" />
+    <Compile Include="Legacy\AzureAuthentication.cs" />
+    <Compile Include="Legacy\AzureConfigurer.cs" />
+    <Compile Include="Legacy\AzureConfigurerEditor.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Legacy\AzureResponse.cs" />
+    <Compile Include="Legacy\Compute\AzureActionWithConfigBase.cs" />
+    <Compile Include="Legacy\Compute\AzureActionWithConfigBaseEditor.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Legacy\Compute\AzureAuthenticationVariableReplacer.cs" />
+    <Compile Include="Legacy\Compute\AzureComputeActionBase.cs" />
+    <Compile Include="Legacy\Compute\AzureComputeActionBaseEditor.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Legacy\Compute\AzureRole.cs" />
+    <Compile Include="Legacy\Compute\AzureSite.cs" />
+    <Compile Include="Legacy\Compute\BlobTransfer.cs" />
+    <Compile Include="Legacy\Compute\ChangeDeploymentConfigurationAction.cs" />
+    <Compile Include="Legacy\Compute\ChangeDeploymentConfigurationActionEditor.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Legacy\Compute\CreateHostedServiceAction.cs" />
+    <Compile Include="Legacy\Compute\CreateHostedServiceActionEditor.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Legacy\Compute\DeleteDeploymentAction.cs" />
+    <Compile Include="Legacy\Compute\DeleteDeploymentActionEditor.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Legacy\Compute\DeleteHostedServiceAction.cs" />
+    <Compile Include="Legacy\Compute\DeleteHostedServiceActionEditor.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Legacy\Compute\DeployPackageAction.cs" />
+    <Compile Include="Legacy\Compute\DeployPackageActionEditor.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Legacy\Compute\PackageAction.cs" />
+    <Compile Include="Legacy\Compute\PackageActionEditor.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Legacy\Compute\SwapDeploymentAction.cs" />
+    <Compile Include="Legacy\Compute\SwapDeploymentActionEditor.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Legacy\LegacyPathResolver.cs" />
+    <Compile Include="Legacy\Storage\UploadFilesToBlobStorageAction.cs" />
+    <Compile Include="Legacy\Storage\UploadFilesToBlobStorageActionEditor.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="..\Common\Common.projitems" Label="Shared" />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>powershell -Command "if (Test-Path C:\Projects\BuildMaster\Extensions -PathType Container) { Compress-Archive -Path '$(TargetDir)*' -DestinationPath C:\Projects\BuildMaster\Extensions\$(TargetName).zip -Force; Move-Item C:\Projects\BuildMaster\Extensions\$(TargetName).zip -Destination C:\Projects\BuildMaster\Extensions\$(TargetName).bmx -Force }"</PostBuildEvent>
+  </PropertyGroup>
+</Project>

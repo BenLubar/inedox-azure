@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>8f67509d-1716-4d6c-b00f-c8d39748883a</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>Inedo.Extensions.Azure</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Configurations\AppServiceConfiguration.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Credentials\AzureCredentials.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)AzureHelpers.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Operations\EnsureAppServiceOperation.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Properties\AssemblyInfo.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)SuggestionProviders\AppServicePricingTierSuggestionProvider.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)SuggestionProviders\RegionSuggestionProvider.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)SuggestionProviders\SubscriptionSuggestionProvider.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)SuggestionProviders\TenantSuggestionProvider.cs" />
+  </ItemGroup>
+</Project>
