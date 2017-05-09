@@ -9,13 +9,16 @@
     <Import_RootNamespace>Inedo.Extensions.Azure</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="$(MSBuildThisFileDirectory)Configurations\AppServiceConfiguration.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Configurations\AppServicePlanConfiguration.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Configurations\WebAppConfiguration.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Credentials\AzureCredentials.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)AzureHelpers.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Operations\EnsureAppServiceOperation.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Operations\EnsureAppServicePlanOperation.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Operations\EnsureWebAppOperation.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Properties\AssemblyInfo.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)SuggestionProviders\AppServicePricingTierSuggestionProvider.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)SuggestionProviders\RegionSuggestionProvider.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)SuggestionProviders\RuntimeVersionSuggestionProvider.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)SuggestionProviders\AzureEnumSuggestionProvider.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)SuggestionProviders\ResourceGroupSuggestionProvider.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)SuggestionProviders\SubscriptionSuggestionProvider.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)SuggestionProviders\TenantSuggestionProvider.cs" />
   </ItemGroup>

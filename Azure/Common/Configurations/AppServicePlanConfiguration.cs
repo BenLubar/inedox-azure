@@ -1,31 +1,65 @@
 ﻿#if BuildMaster
 using Inedo.BuildMaster.Extensibility;
 using Inedo.BuildMaster.Extensibility.Configurations;
+using Inedo.BuildMaster.Extensibility.Credentials;
 using Inedo.BuildMaster.Web.Controls;
 #elif Otter
 using Inedo.Otter.Extensibility;
 using Inedo.Otter.Extensibility.Configurations;
+using Inedo.Otter.Extensibility.Credentials;
 using Inedo.Otter.Web.Controls;
 #endif
 using Inedo.Documentation;
+using Inedo.Extensions.Azure.Credentials;
 using Inedo.Extensions.Azure.SuggestionProviders;
 using Inedo.Serialization;
+using Microsoft.Azure.Management.AppService.Fluent;
+using Microsoft.Azure.Management.Fluent;
+using Microsoft.Azure.Management.Resource.Fluent.Core;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 
 namespace Inedo.Extensions.Azure.Configurations
 {
-    public sealed class AppServiceConfiguration : PersistedConfiguration, IExistential
+    public sealed class AppServicePlanConfiguration : PersistedConfiguration, IExistential, IHasCredentials<AzureCredentials>
     {
+        private string credentialName = null;
+
+        [Required]
+        [ConfigurationKey]
+        [DisplayName("Credentials")]
+        [Description(CommonDescriptions.Credentials)]
+        [ScriptAlias("Credentials")]
+        public string CredentialName
+        {
+            get
+            {
+                return this.credentialName;
+            }
+
+            set
+            {
+                if (value != null)
+                {
+                    this.credentialName = value;
+                }
+            }
+        }
+
+        public IAzure Azure => this.TryGetCredentials()?.Azure;
+
         [Persistent]
         [Required]
+        [ConfigurationKey]
         [DisplayName("Resource group")]
         [ScriptAlias("ResourceGroup")]
+        [SuggestibleValue(typeof(ResourceGroupSuggestionProvider))]
         public string ResourceGroup { get; set; }
 
         [Persistent]
         [Required]
+        [ConfigurationKey]
         [DisplayName("Plan name")]
         [ScriptAlias("Name")]
         public string Name { get; set; }
@@ -34,14 +68,14 @@ namespace Inedo.Extensions.Azure.Configurations
         [Required]
         [DisplayName("Region")]
         [ScriptAlias("Region")]
-        [SuggestibleValue(typeof(RegionSuggestionProvider))]
+        [SuggestibleValue(typeof(AzureEnumSuggestionProvider<Region>))]
         public string Region { get; set; }
 
         [Persistent]
         [Required]
         [DisplayName("Pricing tier")]
         [ScriptAlias("PricingTier")]
-        [SuggestibleValue(typeof(AppServicePricingTierSuggestionProvider))]
+        [SuggestibleValue(typeof(AzureEnumSuggestionProvider<AppServicePricingTier>))]
         public string PricingTier { get; set; }
 
         [Persistent]
@@ -56,20 +90,19 @@ namespace Inedo.Extensions.Azure.Configurations
 
         [Persistent]
         [DisplayName("Exists")]
+        [Description(CommonDescriptions.Exists)]
         [ScriptAlias("Exists")]
         [DefaultValue(true)]
         public bool Exists { get; set; } = true;
 
 #if Otter
-        public override string ConfigurationKey => this.ResourceGroup + " :: " + this.Name;
-
         public override ComparisonResult Compare(PersistedConfiguration other)
         {
             if (other == null)
             {
                 throw new ArgumentNullException(nameof(other));
             }
-            var config = other as AppServiceConfiguration;
+            var config = other as AppServicePlanConfiguration;
             if (config == null)
             {
                 throw new InvalidOperationException("Cannot compare configurations of different types");
